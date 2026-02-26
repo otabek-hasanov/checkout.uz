@@ -1,0 +1,33 @@
+{
+    "name": "stoyishi/checkout-uz",
+    "description": "Checkout.uz payment gateway PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hasanov Otabek",
+            "email": "otabek@hasanov.uz",
+            "homepage": "https://t.me/stoyishi",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stoyishi\\CheckoutUz\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stoyishi\\CheckoutUz\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
