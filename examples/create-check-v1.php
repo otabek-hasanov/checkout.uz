@@ -55,8 +55,6 @@ try {
 
     echo "\nBalans:\n";
     echo "  UZS : " . $balance->getUzs() . "\n";
-    echo "  USD : " . $balance->getUsd() . "\n";
-    echo "  TON : " . $balance->getTon() . "\n";
 
     $stats = $client->getStats();
 

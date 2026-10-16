@@ -18,11 +18,22 @@ class HttpClient
     }
 
     /**
+     * @param array<string, string> $extraHeaders Additional raw headers, e.g. ['Idempotency-Key' => 'order-123']
      * @throws ApiException
      */
-    public function post(string $endpoint, array $body = []): array
+    public function post(string $endpoint, array $body = [], array $extraHeaders = []): array
     {
         $url = $this->baseUrl . '/' . ltrim($endpoint, '/');
+
+        $headers = [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Bearer ' . $this->apiKey,
+        ];
+
+        foreach ($extraHeaders as $name => $value) {
+            $headers[] = $name . ': ' . $value;
+        }
 
         $ch = curl_init();
         curl_setopt_array($ch, [
@@ -31,11 +42,7 @@ class HttpClient
             CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => json_encode($body),
             CURLOPT_TIMEOUT        => $this->timeout,
-            CURLOPT_HTTPHEADER     => [
-                'Content-Type: application/json',
-                'Accept: application/json',
-                'Authorization: Bearer ' . $this->apiKey,
-            ],
+            CURLOPT_HTTPHEADER     => $headers,
         ]);
 
         $response = curl_exec($ch);
